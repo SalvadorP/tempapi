@@ -26,9 +26,9 @@ class MeasureController extends Controller
      {
         $measure = new Measure;
 
-       $measure->temperature= $request->temperature;
-       $measure->humidity = $request->humidity;
-       $measure->pressure = $request->pressure;
+       $measure->temperature= intval($request->temperature);
+       $measure->humidity = intval($request->humidity);
+       $measure->pressure = intval($request->pressure);
 
        $measure->save();
 
@@ -46,9 +46,9 @@ class MeasureController extends Controller
      {
         $measure= Measure::find($id);
 
-        $measure->temperature = $request->input('temperature');
-        $measure->humidity = $request->input('humidity');
-        $measure->pressure = $request->input('pressure');
+        $measure->temperature = intval($request->input('temperature'));
+        $measure->humidity = intval($request->input('humidity'));
+        $measure->pressure = intval($request->input('pressure'));
         $measure->save();
         return response()->json($measure);
      }
