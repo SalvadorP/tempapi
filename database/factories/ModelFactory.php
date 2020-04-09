@@ -26,8 +26,11 @@ $factory->define(User::class, function (Faker $faker) {
 
 $factory->define(Measure::class, function (Faker $faker) {
     return [
-        'temperature' => $faker->numberBetween(0,100),
-        'humidity' => $faker->numberBetween(0,100),
-        'pressure'=> $faker->numberBetween(800,1500),
+        // 'temperature' => $faker->numberBetween(0,100),
+        // 'humidity' => $faker->numberBetween(0,100),
+        // 'pressure'=> $faker->numberBetween(800,1500),
+        'temperature' => $faker->randomFloat(2,0,100),
+        'humidity' => $faker->randomFloat(2,0,100),
+        'pressure'=> $faker->randomFloat(2,800,1500),
     ];
 });
