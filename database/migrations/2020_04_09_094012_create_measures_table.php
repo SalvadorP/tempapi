@@ -15,8 +15,8 @@ class CreateMeasuresTable extends Migration
     {
         Schema::create('measures', function (Blueprint $table) {
             $table->id();
-            $table->decimal('temperature', 5,2);
-            $table->decimal('humidity', 5,2);
+            $table->decimal('temperature', 10,2);
+            $table->decimal('humidity', 10,2);
             $table->decimal('pressure', 10,2);
             $table->timestamps();
         });
