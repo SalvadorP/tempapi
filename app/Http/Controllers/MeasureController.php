@@ -26,9 +26,12 @@ class MeasureController extends Controller
      {
         $measure = new Measure;
 
-       $measure->temperature= filter_var($request->temperature, FILTER_SANITIZE_NUMBER_FLOAT);
-       $measure->humidity = filter_var($request->humidity, FILTER_SANITIZE_NUMBER_FLOAT);
-       $measure->pressure = filter_var($request->pressure, FILTER_SANITIZE_NUMBER_FLOAT);
+      //  $measure->temperature= filter_var($request->temperature, FILTER_SANITIZE_NUMBER_FLOAT);
+      //  $measure->humidity = filter_var($request->humidity, FILTER_SANITIZE_NUMBER_FLOAT);
+      //  $measure->pressure = filter_var($request->pressure, FILTER_SANITIZE_NUMBER_FLOAT);
+      $measure->temperature= $request->temperature;
+       $measure->humidity = $request->humidity;
+       $measure->pressure = $request->pressure;
 
        $measure->save();
 
