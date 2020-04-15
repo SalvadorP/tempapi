@@ -32,5 +32,6 @@ $factory->define(Measure::class, function (Faker $faker) {
         'temperature' => $faker->randomFloat(2,0,100),
         'humidity' => $faker->randomFloat(2,0,100),
         'pressure'=> $faker->randomFloat(2,800,1500),
+        'device'=> $faker->name,
     ];
 });

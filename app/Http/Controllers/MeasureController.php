@@ -29,6 +29,7 @@ class MeasureController extends Controller
        $measure->temperature= $request->temperature;
        $measure->humidity = $request->humidity;
        $measure->pressure = $request->pressure;
+       $measure->device = $request->device;
 
        $measure->save();
 
@@ -49,6 +50,7 @@ class MeasureController extends Controller
         $measure->temperature = $request->input('temperature');
         $measure->humidity = $request->input('humidity');
         $measure->pressure = $request->input('pressure');
+        $measure->device = $request->input('device');
         $measure->save();
         return response()->json($measure);
      }
