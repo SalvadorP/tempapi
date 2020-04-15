@@ -11,9 +11,11 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
+// $router->get('/', function () use ($router) {
+//     return $router->app->version();
+// });
+
+$router->get('/', 'FrontController@index');
 
 $router->group(['prefix'=>'api/v1'], function() use($router){
     $router->get('/measures', 'MeasureController@index');
