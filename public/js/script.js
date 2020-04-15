@@ -50,24 +50,24 @@ fetch(url)
         labels: labels,
         datasets: [
             {
-                label: 'Temperatures',
+                label: 'Temperature',
                 data: temps,
-                backgroundColor: [
-                    backgroundChartColors.red
-                ],
-                borderColor: [
-                    chartColors.blue
-                ],
-                borderWidth: 1
-            },
-            {
-                label: 'Humidities',
-                data: humidities,
                 backgroundColor: [
                     backgroundChartColors.purple
                 ],
                 borderColor: [
-                    chartColors.green
+                    chartColors.red
+                ],
+                borderWidth: 1
+            },
+            {
+                label: 'Humidity',
+                data: humidities,
+                backgroundColor: [
+                    backgroundChartColors.green
+                ],
+                borderColor: [
+                    chartColors.blue
                 ],
                 borderWidth: 1
             }
