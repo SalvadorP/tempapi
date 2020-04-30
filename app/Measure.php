@@ -12,7 +12,7 @@ class Measure extends Model
      * @var array
      */
     protected $fillable = [
-        'temperature', 'humidity', 'pressure'
+        'temperature', 'humidity', 'pressure', 'device'
     ];
 
 }
