@@ -16,8 +16,9 @@ class MeasureController extends Controller
     public function index()
     {
 
-     $measures = Measure::all();
-
+	    // $measures = Measure::all();
+	    // Get last day and a half of measures.
+	    $measures = Measure::latest()->take(36)->get();
      return response()->json($measures);
 
     }
