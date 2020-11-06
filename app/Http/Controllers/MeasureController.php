@@ -15,15 +15,14 @@ class MeasureController extends Controller
      */
     public function index()
     {
-
 	    // $measures = Measure::all();
 	    // Get last day and a half of measures.
 	    $measures = Measure::latest()->take(36)->get();
      return response()->json($measures);
 
     }
-
-     public function create(Request $request)
+   
+    public function create(Request $request)
      {
         $measure = new Measure;
 

@@ -16,6 +16,7 @@
 // });
 
 $router->get('/', 'FrontController@index');
+$router->get('/api/v1/measures', 'MeasureController@index');
 
 $router->group(['prefix'=>'api/v1'], function() use($router){
     $router->get('/measures', 'MeasureController@index');
