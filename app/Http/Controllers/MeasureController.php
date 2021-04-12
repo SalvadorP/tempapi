@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Measure;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 
 class MeasureController extends Controller
 {
@@ -84,7 +83,6 @@ class MeasureController extends Controller
 
    public function write()
    {
-      $client = new Client();
       $measures = Measure::orderBy('id', 'desc')->take(10)->get();
       foreach ($measures as $measure) {
          $this->sendData($measure);
@@ -97,8 +95,9 @@ class MeasureController extends Controller
     */
    protected function sendData(Measure $measure)
    {
-      $params = 'field1=' . $measure->temperature . '&field2=' . $measure->humidity . '&field3=' . $measure->pressure;
-      $url = 'https://api.thingspeak.com/update?api_key=' . env('THINGSPEAK_READ_KEY') . '&' . $params;
+      $client = new Client();
+      $params = 'field1=' . urlencode($measure->temperature) . '&field2=' . urlencode($measure->humidity) . '&field3=' . urlencode($measure->pressure);
+      $url = 'https://api.thingspeak.com/update?api_key=' . env('THINGSPEAK_WRITE_KEY') . '&' . $params;
       $response = $client->request('GET', $url);
       if ($response->getStatusCode() == 200) {
          $data = $response->getBody()->getContents();
