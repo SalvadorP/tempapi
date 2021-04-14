@@ -71,7 +71,7 @@ class MeasureController extends Controller
 
    public function read()
    {
-      $url = 'https://api.thingspeak.com/channels/1355687/feeds.json?api_key=' . env('THINGSPEAK_READ_KEY') . '&results=20';
+      $url = 'https://api.thingspeak.com/channels/1355687/feeds.json?api_key=' . env('THINGSPEAK_CH1_READ_KEY') . '&results=20';
       $client = new Client();
       $response = $client->request('GET', $url);
       if ($response->getStatusCode() == 200) {
@@ -97,7 +97,9 @@ class MeasureController extends Controller
    {
       $client = new Client();
       $params = 'field1=' . urlencode($measure->temperature) . '&field2=' . urlencode($measure->humidity) . '&field3=' . urlencode($measure->pressure);
-      $url = 'https://api.thingspeak.com/update?api_key=' . env('THINGSPEAK_WRITE_KEY') . '&' . $params;
+      // TODO: Avoid calling here the Thingspeak, do it on the device.
+      $key = $measure->device == 'jardin' ? env('THINGSPEAK_CH2_WRITE_KEY') : env('THINGSPEAK_CH1_WRITE_KEY');
+      $url = 'https://api.thingspeak.com/update?api_key=' . $key . '&' . $params;
       $response = $client->request('GET', $url);
       if ($response->getStatusCode() == 200) {
          $data = $response->getBody()->getContents();
