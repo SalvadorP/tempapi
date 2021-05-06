@@ -17,7 +17,7 @@ class MeasureController extends Controller
    {
       // $measures = Measure::all();
       // Get last day and a half of measures.
-      $measures = Measure::latest()->take(36)->get();
+      $measures = Measure::latest()->where('device', 'Buhardilla')->take(36)->get();
       return response()->json($measures);
    }
 
@@ -33,7 +33,7 @@ class MeasureController extends Controller
       $measure->save();
 
       // Send data to Thingspeak
-      $this->sendData($measure);
+      // $this->sendData($measure);
 
       return response()->json($measure);
    }
@@ -56,7 +56,7 @@ class MeasureController extends Controller
       $measure->save();
 
       // Send data to Thingspeak
-      $this->sendData($measure);
+      // $this->sendData($measure);
 
       return response()->json($measure);
    }
@@ -74,20 +74,21 @@ class MeasureController extends Controller
       $url = 'https://api.thingspeak.com/channels/1355687/feeds.json?api_key=' . env('THINGSPEAK_CH1_READ_KEY') . '&results=20';
       $client = new Client();
       $response = $client->request('GET', $url);
+      $data = [];
       if ($response->getStatusCode() == 200) {
          $data = $response->getBody()->getContents();
-         dd(json_decode(($data)));
       }
+      return response()->json($data);
       // TODO: Throw exception and log it.
    }
 
-   public function write()
-   {
-      $measures = Measure::orderBy('id', 'desc')->take(10)->get();
-      foreach ($measures as $measure) {
-         $this->sendData($measure);
-      }
-   }
+   // public function write()
+   // {
+   //    $measures = Measure::orderBy('id', 'desc')->take(10)->get();
+   //    foreach ($measures as $measure) {
+   //       $this->sendData($measure);
+   //    }
+   // }
 
    /**
     * Sends data to the thingspeak channel.
@@ -98,7 +99,8 @@ class MeasureController extends Controller
       $client = new Client();
       $params = 'field1=' . urlencode($measure->temperature) . '&field2=' . urlencode($measure->humidity) . '&field3=' . urlencode($measure->pressure);
       // TODO: Avoid calling here the Thingspeak, do it on the device.
-      $key = $measure->device == 'jardin' ? env('THINGSPEAK_CH2_WRITE_KEY') : env('THINGSPEAK_CH1_WRITE_KEY');
+      // $key = $measure->device == 'jardin' ? env('THINGSPEAK_CH2_WRITE_KEY') : env('THINGSPEAK_CH1_WRITE_KEY');
+      $key = env('THINGSPEAK_CH1_WRITE_KEY');
       $url = 'https://api.thingspeak.com/update?api_key=' . $key . '&' . $params;
       $response = $client->request('GET', $url);
       if ($response->getStatusCode() == 200) {

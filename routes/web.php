@@ -26,5 +26,5 @@ $router->group(['prefix'=>'api/v1'], function() use($router){
     $router->delete('/measure/{id}', 'MeasureController@destroy');
 
     $router->get('/measures/read', 'MeasureController@read');
-    $router->get('/measures/write', 'MeasureController@write');
+    // $router->get('/measures/write', 'MeasureController@write');
 });
