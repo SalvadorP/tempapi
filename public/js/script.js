@@ -1,4 +1,4 @@
-var url = "http://192.168.2.150/api/v1/measures";
+var url = "http://tempapi.test/api/v1/measures";
 var labels = [];
 var temps = [];
 var humidities = [];
